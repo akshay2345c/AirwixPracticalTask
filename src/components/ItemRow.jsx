@@ -83,14 +83,14 @@ const ItemRowComponent = ({ index, row, onChange, onRemove }) => {
           type="text"
           inputMode="decimal"
           className={`w-full rounded-sm border px-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-offset-0 ${
-            showInlineError ? 'border-error focus:ring-error' : 'border-border focus:ring-primary'
+            showInlineError ? 'border-red-600 focus:ring-red-600' : 'border-border focus:ring-primary'
           }`}
           value={row.quantity ?? ''}
           onChange={handleQuantityChange}
           placeholder="0.00"
         />
         {showInlineError && (
-          <span className="text-[11px] text-error">
+          <span className="text-[11px] text-red-600">
             Quantity cannot exceed available stock ({formatDecimal(maxQty)})
           </span>
         )}

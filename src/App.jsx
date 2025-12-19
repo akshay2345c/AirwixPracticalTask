@@ -78,7 +78,7 @@ const App = () => {
                     button on the right.
                   </p>
                 ) : (
-                  <p className="mt-0.5 text-xs text-error font-medium">
+                  <p className="mt-0.5 text-xs text-red-600 font-medium">
                     You have reached the maximum of {MAX_ROWS} items. Remove an existing row to add another.
                   </p>
                 )}
