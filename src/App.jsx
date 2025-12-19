@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback } from 'react'
+import React, { useMemo, useState, useCallback, useEffect } from 'react'
 import './index.css'
 import { ItemRow } from './components/ItemRow'
 import { Totals } from './components/Totals'
@@ -10,10 +10,37 @@ const createEmptyRow = () => ({
   quantity: '',
 })
 
+const STORAGE_KEY = 'airwix_item_rows'
+
+const loadInitialRows = () => {
+  if (typeof window === 'undefined') {
+    return [createEmptyRow()]
+  }
+
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY)
+    if (!stored) return [createEmptyRow()]
+
+    const parsed = JSON.parse(stored)
+    if (!Array.isArray(parsed) || parsed.length === 0) {
+      return [createEmptyRow()]
+    }
+
+    return parsed
+      .slice(0, MAX_ROWS)
+      .map((row) => ({
+        itemId: row.itemId || '',
+        quantity: row.quantity || '',
+      }))
+  } catch (e) {
+    return [createEmptyRow()]
+  }
+}
+
 const MAX_ROWS = 5
 
 const App = () => {
-  const [rows, setRows] = useState([createEmptyRow()])
+  const [rows, setRows] = useState(() => loadInitialRows())
 
   const handleRowChange = useCallback((index, updatedRow) => {
     setRows((prev) => {
@@ -39,6 +66,11 @@ const App = () => {
       return next.length === 0 ? [createEmptyRow()] : next
     })
   }
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(rows))
+  }, [rows])
 
   const totals = useMemo(
     () => calculateTotals(rows, ITEMS, 50, 2),
