@@ -51,7 +51,7 @@ const ItemRowComponent = ({ index, row, onChange, onRemove }) => {
   const showInlineError = qtyExceedsStock
 
   return (
-    <div className="min-w-[720px] grid grid-cols-[1.4fr,0.8fr,0.9fr,0.8fr,0.8fr,0.9fr,0.4fr] gap-2 items-start text-sm py-2 border-b border-border last:border-b-0">
+    <div className="w-full grid grid-cols-[1.4fr,0.8fr,0.9fr,0.8fr,0.8fr,0.9fr,0.4fr] gap-2 items-start text-sm py-2 border-b border-border last:border-b-0">
       <div className="flex flex-col gap-1">
         <label className="text-xs text-muted">Item</label>
         <select
