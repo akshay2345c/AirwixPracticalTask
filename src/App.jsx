@@ -66,17 +66,31 @@ const App = () => {
               <div>
                 <h2 className="text-base font-semibold text-text">Item Entry</h2>
                 <p className="text-xs text-muted">
-                  Maximum of {MAX_ROWS} item rows. Quantity cannot exceed available stock.
+                  You can add up to {MAX_ROWS} item rows. Quantity cannot exceed available stock.
                 </p>
+                <p className="text-xs text-muted mt-0.5">
+                  Currently using <span className="font-semibold text-text">{rows.length}</span> of{' '}
+                  <span className="font-semibold text-text">{MAX_ROWS}</span> rows.
+                </p>
+                {!hasReachedMaxRows ? (
+                  <p className="mt-0.5 text-xs text-success">
+                    To add another item, click the <span className="font-semibold">Add Item Row</span>{' '}
+                    button on the right.
+                  </p>
+                ) : (
+                  <p className="mt-0.5 text-xs text-error font-medium">
+                    You have reached the maximum of {MAX_ROWS} items. Remove an existing row to add another.
+                  </p>
+                )}
               </div>
               <button
                 type="button"
                 onClick={handleAddRow}
                 disabled={hasReachedMaxRows}
-                className={`inline-flex items-center justify-center rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                className={`inline-flex items-center justify-center rounded-full border px-4 py-2 text-xs font-medium transition-colors cursor-pointer ${
                   hasReachedMaxRows
-                    ? 'bg-slate-100 text-muted cursor-not-allowed'
-                    : 'bg-primary text-white hover:bg-blue-700 active:bg-blue-800 shadow-soft'
+                    ? 'bg-slate-100 text-muted border-border cursor-not-allowed'
+                    : 'bg-blue-700 text-white border-primary hover:bg-blue-700 active:bg-blue-800 shadow-soft'
                 }`}
               >
                 Add Item Row
@@ -105,6 +119,8 @@ const App = () => {
                       onRemove={handleRemoveRow}
                     />
                   ))}
+
+               
                 </div>
               </div>
             </div>

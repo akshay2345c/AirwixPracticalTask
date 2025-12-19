@@ -134,7 +134,7 @@ const ItemRowComponent = ({ index, row, onChange, onRemove }) => {
         <button
           type="button"
           onClick={() => onRemove(index)}
-          className="mt-5 inline-flex items-center justify-center rounded-full border border-border bg-card px-2 py-1 text-[11px] text-muted hover:bg-slate-100 active:bg-slate-200 transition-colors"
+          className="mt-5 inline-flex items-center justify-center rounded-full border border-border bg-card px-2 py-1 text-[11px] text-muted hover:bg-slate-100 active:bg-slate-200 transition-colors cursor-pointer"
         >
           Remove
         </button>
